@@ -9,11 +9,12 @@
 .training-step .numbers>div{padding:12px;background:white;border:1px solid #e1e6f0;border-radius:9px}
 @media(max-width:650px){.training-step .numbers{grid-template-columns:1fr}}
 </style>
-<style>.lab-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:20px}.lab-tabs button{background:#e8edf7;color:#263956;padding:12px 6px}.lab-tabs button[aria-selected="true"]{background:#264a9d;color:white}.lab-tab-caption{color:#68758a;margin:10px 0}.lab-panel[hidden]{display:none!important}.eps-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.eps-grid input{box-sizing:border-box;width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}.eps-grid label{margin-top:8px}.eps-table{width:100%;border-collapse:collapse;margin:12px 0}.eps-table td,.eps-table th{border-bottom:1px solid #dce3ee;padding:10px 8px;text-align:right}.eps-table th:first-child,.eps-table td:first-child{text-align:left}@media(max-width:620px){.lab-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.eps-grid{grid-template-columns:1fr}}</style></head><body><main><header><div><h1>투자 사고 실험실</h1><div class="muted">Market Pulse · 유동성 × 심리 × 기업이익</div></div><span class="pill">7.0 · 모듈형 투자 분석</span></header><nav class="lab-tabs" aria-label="투자 사고 실험실 메뉴"><button type="button" data-lab-tab="market" aria-selected="true">시장 분석</button><button type="button" data-lab-tab="company" aria-selected="false">기업·EPS</button><button type="button" data-lab-tab="committee" aria-selected="false">투자위원회</button><button type="button" data-lab-tab="review" aria-selected="false">투자 복기</button></nav><p class="lab-tab-caption" id="labTabCaption">시장 데이터와 시장 국면을 확인합니다.</p><section class="lab-panel" id="lab-market"><div class="card" id="officialData"><div class="row"><div><h2>실제 금융 데이터 조회</h2><p class="muted">미국 연방준비은행 FRED 공개 시계열을 GitHub에서 자동 수집합니다. 실제 수치와 가상 시뮬레이션은 별개입니다.</p></div><span class="pill">실제 데이터 · 점수화 없음</span></div><div class="buttons"><button id="fetchData" type="button">GitHub 데이터 새로고침</button><button id="csvBtn" type="button" class="secondary">FRED CSV 가져오기</button><input id="csvFile" type="file" accept=".csv,text/csv" multiple hidden></div><p id="dataStatus" class="muted" role="status" aria-live="polite">GitHub에 저장된 금융 데이터를 불러오는 중입니다.</p><div id="dataGrid" class="grid"></div><p class="muted">출처: <a href="https://fred.stlouisfed.org/" target="_blank" rel="noopener noreferrer">FRED (St. Louis Fed)</a>. 변화량은 마지막 관측일로부터 7·30일 이전의 가장 가까운 유효 관측값과 비교합니다. 일부 지표는 발표 주기가 다릅니다.</p></div><div class="card" id="marketAnalysis"><div class="row"><div><h2>실제 데이터 기반 시장 국면 분석</h2><p class="muted">규칙 기반 해석 · 가상 점수와 분리 · 투자 매매 신호 아님</p></div><span class="pill" id="analysisStatus">데이터 대기</span></div><div class="grid" id="analysisGrid"></div><h3>코스톨라니 관점: 돈 × 심리</h3><div class="note" id="kostolany">데이터가 로드되면 신호의 일치·충돌 여부를 표시합니다.</div><h3>강세·기준·약세 시나리오</h3><div class="grid" id="scenarioGrid"></div><h3>판단의 근거와 한계</h3><div id="analysisEvidence" class="note">지표별 판단 근거를 준비 중입니다.</div><p class="muted">분석 기준: VIX·하이일드 스프레드는 30일 변화, 국채·실질금리는 30일 변화, M2는 전월·전년, 연준 총자산은 4주 변화를 우선합니다. 지표가 부족하면 결론을 보류합니다. 기준값은 교육용 휴리스틱으로 예측력 검증 전입니다.</p></div>
-</section><section class="lab-panel" id="lab-company" hidden><div class="card" id="epsAnalysis"><div class="row"><div><h2>7.0 · EPS 성장·둔화 분석</h2><p class="muted">실적·예상 EPS를 직접 입력해 성장률, 성장률 변화, 컨센서스 수정을 구분합니다. 기업 데이터 자동 조회는 아직 제공하지 않습니다.</p></div><span class="pill">입력값 기반 · 무료</span></div>
+<style>.lab-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:20px}.lab-tabs button{background:#e8edf7;color:#263956;padding:12px 6px}.lab-tabs button[aria-selected="true"]{background:#264a9d;color:white}.lab-tab-caption{color:#68758a;margin:10px 0}.lab-panel[hidden]{display:none!important}.eps-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.eps-grid input{box-sizing:border-box;width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}.eps-grid label{margin-top:8px}.eps-table{width:100%;border-collapse:collapse;margin:12px 0}.eps-table td,.eps-table th{border-bottom:1px solid #dce3ee;padding:10px 8px;text-align:right}.eps-table th:first-child,.eps-table td:first-child{text-align:left}@media(max-width:620px){.lab-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.eps-grid{grid-template-columns:1fr}}.eps-chart{margin:16px 0}.eps-chart svg{display:block;width:100%;height:auto;max-height:300px}.eps-chart .chart-title{font-weight:700;margin-bottom:8px}.eps-quarter-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}.eps-quarter-grid input{box-sizing:border-box;width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px}.eps-quarter-grid label{font-size:13px}.eps-status{font-size:12px;color:#63758e}.eps-table-wrap{overflow-x:auto}@media(max-width:650px){.eps-quarter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}</style></head><body><main><header><div><h1>투자 사고 실험실</h1><div class="muted">Market Pulse · 유동성 × 심리 × 기업이익</div></div><span class="pill">7.1 · EPS 성장 추적</span></header><nav class="lab-tabs" aria-label="투자 사고 실험실 메뉴"><button type="button" data-lab-tab="market" aria-selected="true">시장 분석</button><button type="button" data-lab-tab="company" aria-selected="false">기업·EPS</button><button type="button" data-lab-tab="committee" aria-selected="false">투자위원회</button><button type="button" data-lab-tab="review" aria-selected="false">투자 복기</button></nav><p class="lab-tab-caption" id="labTabCaption">시장 데이터와 시장 국면을 확인합니다.</p><section class="lab-panel" id="lab-market"><div class="card" id="officialData"><div class="row"><div><h2>실제 금융 데이터 조회</h2><p class="muted">미국 연방준비은행 FRED 공개 시계열을 GitHub에서 자동 수집합니다. 실제 수치와 가상 시뮬레이션은 별개입니다.</p></div><span class="pill">실제 데이터 · 점수화 없음</span></div><div class="buttons"><button id="fetchData" type="button">GitHub 데이터 새로고침</button><button id="csvBtn" type="button" class="secondary">FRED CSV 가져오기</button><input id="csvFile" type="file" accept=".csv,text/csv" multiple hidden></div><p id="dataStatus" class="muted" role="status" aria-live="polite">GitHub에 저장된 금융 데이터를 불러오는 중입니다.</p><div id="dataGrid" class="grid"></div><p class="muted">출처: <a href="https://fred.stlouisfed.org/" target="_blank" rel="noopener noreferrer">FRED (St. Louis Fed)</a>. 변화량은 마지막 관측일로부터 7·30일 이전의 가장 가까운 유효 관측값과 비교합니다. 일부 지표는 발표 주기가 다릅니다.</p></div><div class="card" id="marketAnalysis"><div class="row"><div><h2>실제 데이터 기반 시장 국면 분석</h2><p class="muted">규칙 기반 해석 · 가상 점수와 분리 · 투자 매매 신호 아님</p></div><span class="pill" id="analysisStatus">데이터 대기</span></div><div class="grid" id="analysisGrid"></div><h3>코스톨라니 관점: 돈 × 심리</h3><div class="note" id="kostolany">데이터가 로드되면 신호의 일치·충돌 여부를 표시합니다.</div><h3>강세·기준·약세 시나리오</h3><div class="grid" id="scenarioGrid"></div><h3>판단의 근거와 한계</h3><div id="analysisEvidence" class="note">지표별 판단 근거를 준비 중입니다.</div><p class="muted">분석 기준: VIX·하이일드 스프레드는 30일 변화, 국채·실질금리는 30일 변화, M2는 전월·전년, 연준 총자산은 4주 변화를 우선합니다. 지표가 부족하면 결론을 보류합니다. 기준값은 교육용 휴리스틱으로 예측력 검증 전입니다.</p></div>
+</section><section class="lab-panel" id="lab-company" hidden><div class="card" id="epsAnalysis"><div class="row"><div><h2>7.1 · 연간·분기 EPS 성장 추적</h2><p class="muted">실적·예상 EPS를 직접 입력해 성장률, 성장률 변화, 컨센서스 수정을 구분합니다. 기업 데이터 자동 조회는 아직 제공하지 않습니다. 연도는 자동 이동하며 실제·예상 상태는 직접 선택합니다.</p></div><span class="pill">입력값 기반 · 무료</span></div>
 <div class="training-step"><h3>1. EPS 입력</h3><label for="epsCompany">기업명·티커</label><input id="epsCompany" type="text" placeholder="예: 알파벳 GOOGL" maxlength="100"><div class="eps-grid" id="epsInputs"></div><p class="muted">연도와 EPS는 동일 회계 기준·통화·희석 EPS를 사용하세요. 적자 또는 흑자전환 구간의 일반적인 성장률 계산은 의미가 없을 수 있습니다.</p><button id="epsCalc">EPS 성장 흐름 계산</button></div>
-<div class="training-step"><h3>2. EPS 컨센서스 수정 확인</h3><p class="muted">같은 회계연도 EPS 전망을 서로 다른 시점에서 비교합니다. 실제 컨센서스는 입력자가 출처를 확인해야 합니다.</p><div class="eps-grid"><div><label for="epsOld">3개월 전 예상 EPS</label><input id="epsOld" type="number" step="any" placeholder="예: 10.5"></div><div><label for="epsNew">현재 예상 EPS</label><input id="epsNew" type="number" step="any" placeholder="예: 10.0"></div><div><label for="epsTargetYear">예상 대상 회계연도</label><input id="epsTargetYear" type="number" step="1" placeholder="예: 2027"></div><div><label for="epsSource">자료 출처·확인일</label><input id="epsSource" type="text" placeholder="예: 증권사 집계, 2026-11-05"></div></div><button id="epsRevision">추정치 변화 계산</button></div>
-<div class="training-step"><h3>3. 결과 및 투자위원회 연계</h3><div id="epsResult" class="feedback" aria-live="polite">EPS를 입력하고 계산을 눌러주세요.</div><div class="buttons"><button class="secondary" id="epsToCommittee">분석 내용을 투자위원회 의제로 보내기</button><button class="secondary" id="epsExport">EPS 분석 JSON 백업</button></div><p class="muted">전망 EPS의 성장률 둔화와 컨센서스 하향은 서로 다릅니다. 둘 중 하나만으로 매수·매도를 결정하지 않습니다.</p></div></div></section><section class="lab-panel" id="lab-committee" hidden><div class="card" id="investmentCommittee">
+<div class="training-step"><h3>2. 분기별 EPS · 최근 12개 분기</h3><p class="muted">분기 희석 EPS를 오래된 분기부터 입력하세요. 동일한 회계 기준의 실제 EPS만 입력해야 하며, 전년 동기 대비 성장률은 4분기 전과 비교합니다. 미입력 분기는 추정하지 않습니다.</p><div class="eps-quarter-grid" id="epsQuarterInputs"></div><button id="epsQuarterCalc" type="button">분기 EPS 성장·TTM 계산</button><div id="epsQuarterResult" class="feedback" aria-live="polite">분기 EPS를 입력한 뒤 계산해 주세요.</div><div class="eps-chart" id="epsQuarterChart"></div></div>
+<div class="training-step"><h3>3. EPS 컨센서스 수정 확인</h3><p class="muted">같은 회계연도 EPS 전망을 서로 다른 시점에서 비교합니다. 실제 컨센서스는 입력자가 출처를 확인해야 합니다.</p><div class="eps-grid"><div><label for="epsOld">3개월 전 예상 EPS</label><input id="epsOld" type="number" step="any" placeholder="예: 10.5"></div><div><label for="epsNew">현재 예상 EPS</label><input id="epsNew" type="number" step="any" placeholder="예: 10.0"></div><div><label for="epsTargetYear">예상 대상 회계연도</label><input id="epsTargetYear" type="number" step="1" placeholder="예: 2027"></div><div><label for="epsSource">자료 출처·확인일</label><input id="epsSource" type="text" placeholder="예: 증권사 집계, 2026-11-05"></div></div><button id="epsRevision">추정치 변화 계산</button></div>
+<div class="training-step"><h3>4. 결과 및 투자위원회 연계</h3><div id="epsResult" class="feedback" aria-live="polite">EPS를 입력하고 계산을 눌러주세요.</div><div class="eps-chart" id="epsAnnualChart"></div><div class="eps-chart" id="epsConsensusChart"></div><div class="buttons"><button class="secondary" id="epsToCommittee">분석 내용을 투자위원회 의제로 보내기</button><button class="secondary" id="epsExport">EPS 분석 JSON 백업</button></div><p class="muted">전망 EPS의 성장률 둔화와 컨센서스 하향은 서로 다릅니다. 둘 중 하나만으로 매수·매도를 결정하지 않습니다.</p></div></div></section><section class="lab-panel" id="lab-committee" hidden><div class="card" id="investmentCommittee">
  <div class="row"><div><h2>6.0 · 4인 투자위원회</h2><p class="muted">규칙 기반 모의 토론 · AI API 없이 무료 · 확인된 시장 지표와 사용자 가정 구분</p></div><span class="pill">자동 토론 시뮬레이션</span></div>
  <div class="training-step">
   <h3>1. 투자 의제 제출</h3>
@@ -331,7 +332,7 @@ showLabTab(labTabs.includes(location.hash.slice(1))?location.hash.slice(1):'mark
 const epsYearNow=new Date().getFullYear();
 const epsYears=Array.from({length:6},(_,i)=>epsYearNow-3+i);
 const epsInputs=document.getElementById('epsInputs');
-epsYears.forEach((year,i)=>{const wrap=document.createElement('div'),label=document.createElement('label'),input=document.createElement('input');label.textContent=year+(i>=3?'E (예상)':' (실적)')+' · 희석 EPS';label.htmlFor='epsY'+i;input.id='epsY'+i;input.type='number';input.step='any';input.placeholder='미입력';wrap.append(label,input);epsInputs.append(wrap)});
+epsYears.forEach((year,i)=>{const wrap=document.createElement('div'),label=document.createElement('label'),input=document.createElement('input');label.textContent=year+' · 희석 EPS';label.htmlFor='epsY'+i;input.id='epsY'+i;input.type='number';input.step='any';input.placeholder='미입력';const status=document.createElement('select');status.id='epsStatus'+i;status.setAttribute('aria-label',year+' 실적 상태');[['actual','확정 실적'],['estimate','예상 실적']].forEach(([value,text])=>{const opt=document.createElement('option');opt.value=value;opt.textContent=text;status.append(opt)});status.value=i>=3?'estimate':'actual';status.style.cssText='width:100%;padding:8px;margin-top:5px;border:1px solid #cbd5e1;border-radius:8px';wrap.append(label,input,status);epsInputs.append(wrap)});
 let epsGrowthReport='',epsRevisionReport='';
 function epsNumber(id){const raw=document.getElementById(id).value.trim();if(raw==='')return null;const val=Number(raw);return Number.isFinite(val)?val:null}
 function epsFmt(value){return Number.isFinite(value)?value.toFixed(1)+'%':'N/M'}
@@ -339,29 +340,84 @@ function epsRepaint(){document.getElementById('epsResult').textContent=(epsGrowt
 document.getElementById('epsCalc').onclick=()=>{
  const values=epsYears.map((_,i)=>epsNumber('epsY'+i));
  const rows=['회계연도 | EPS | YoY 성장률 | 성장률 변화'];let lastGrowth=null,valid=0;
- epsYears.forEach((y,i)=>{const v=values[i],prev=i?values[i-1]:null,g=(v!==null&&prev!==null&&prev>0&&v>0)?(v/prev-1)*100:null;const accel=g!==null&&lastGrowth!==null?(g-lastGrowth):null;rows.push(y+(i>=3?'E':'')+' | '+(v===null?'미입력':v.toFixed(3))+' | '+epsFmt(g)+' | '+(accel===null?'N/M':(accel>=0?'+':'')+accel.toFixed(1)+'%p'));if(g!==null){lastGrowth=g;valid++}else lastGrowth=null});
+ epsYears.forEach((y,i)=>{const v=values[i],prev=i?values[i-1]:null,g=(v!==null&&prev!==null&&prev>0&&v>0)?(v/prev-1)*100:null;const accel=g!==null&&lastGrowth!==null?(g-lastGrowth):null;rows.push(y+(document.getElementById('epsStatus'+i).value==='estimate'?'E':'A')+' | '+(v===null?'미입력':v.toFixed(3))+' | '+epsFmt(g)+' | '+(accel===null?'N/M':(accel>=0?'+':'')+accel.toFixed(1)+'%p'));if(g!==null){lastGrowth=g;valid++}else lastGrowth=null});
  if(!valid)rows.push('계산 가능한 연속 양(+)의 EPS가 부족합니다.');
  const latest=values.map((v,i)=>({v,i})).filter(x=>x.v!==null);if(latest.length>=2){const x=latest.at(-1),y=latest.at(-2);if(x.i-y.i>1)rows.push('경고: 최신 두 EPS 사이에 누락 연도가 있습니다. 성장률 비교를 건너뜁니다.')}
- epsGrowthReport=rows.join('\n');epsRepaint();
+ epsGrowthReport=rows.join('\n');epsRepaint();epsDrawAnnual();
 };
 document.getElementById('epsRevision').onclick=()=>{
  const old=epsNumber('epsOld'),now=epsNumber('epsNew'),year=epsNumber('epsTargetYear'),source=document.getElementById('epsSource').value.trim();
  if(old===null||now===null||year===null||!Number.isInteger(year)){epsRevisionReport='컨센서스 수정: 두 EPS 추정치와 대상 회계연도를 입력해 주세요.'}
  else if(old<=0||now<=0){epsRevisionReport='컨센서스 수정: 이전/현재 EPS가 0 이하인 경우 일반적인 백분율 수정률은 N/M입니다. 절대 변화 '+(now-old).toFixed(3)+'만 표시합니다.'}
  else{const change=(now/old-1)*100;epsRevisionReport=year+' 회계연도 EPS 컨센서스: '+old.toFixed(3)+' → '+now.toFixed(3)+' ('+(change>=0?'+':'')+change.toFixed(1)+'%)'+(source?'\n출처·확인일(사용자 입력): '+source:'\n출처·확인일 미기재: 검증 전 가정');}
- epsRepaint();
+ epsRepaint();epsDrawConsensus();
 };
 document.getElementById('epsToCommittee').onclick=()=>{
  const name=document.getElementById('epsCompany').value.trim();if(name)document.getElementById('committeeCompany').value=name;
- const note='[사용자 입력 EPS 분석 · 검증 전]\n'+epsGrowthReport+'\n'+epsRevisionReport;
- if(!epsGrowthReport&&!epsRevisionReport){alert('먼저 EPS 성장률 또는 컨센서스 수정을 계산해 주세요.');return}
+ const note='[사용자 입력 EPS 분석 · 검증 전]\n'+epsGrowthReport+'\n'+epsQuarterReport+'\n'+epsRevisionReport;
+ if(!epsGrowthReport&&!epsRevisionReport&&!epsQuarterReport){alert('먼저 EPS 성장률 또는 컨센서스 수정을 계산해 주세요.');return}
  const topic=document.getElementById('committeeTopic');topic.value=(topic.value.trim()?topic.value.trim()+'\n\n':'')+note.slice(0,Math.max(0,3000-topic.value.length-2));
  const evidence=document.getElementById('committeeEvidence');const source=document.getElementById('epsSource').value.trim();if(source)evidence.value=(evidence.value+'\n'+source).trim().slice(0,2000);
  // Do not automatically mark revisions as verified: the source is supplied by the user.
  showLabTab('committee');document.getElementById('committeeStatus').textContent='EPS 분석 내용을 의제에 옮겼습니다. 사용자 입력값은 검증된 컨센서스로 취급하지 않습니다.';
 };
 document.getElementById('epsExport').onclick=()=>{
- const payload={version:7,company:document.getElementById('epsCompany').value,years:epsYears,eps:epsYears.map((_,i)=>epsNumber('epsY'+i)),revision:{previous:epsNumber('epsOld'),current:epsNumber('epsNew'),targetYear:epsNumber('epsTargetYear'),source:document.getElementById('epsSource').value},report:{growth:epsGrowthReport,revision:epsRevisionReport}};
+ const payload={version:7,company:document.getElementById('epsCompany').value,years:epsYears,eps:epsYears.map((_,i)=>epsNumber('epsY'+i)),revision:{previous:epsNumber('epsOld'),current:epsNumber('epsNew'),targetYear:epsNumber('epsTargetYear'),source:document.getElementById('epsSource').value},quarters:epsQuarterLabels.map((q,i)=>({quarter:q,eps:epsNumber('epsQ'+i)})),status:epsYears.map((_,i)=>document.getElementById('epsStatus'+i).value),report:{growth:epsGrowthReport,quarter:epsQuarterReport,revision:epsRevisionReport}};
  const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='eps-analysis-v7.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)
 };
+
+// 7.1: dependency-free, input-driven SVG charts; no fabricated corporate data.
+const epsQuarterLabels=[];
+const epsQuarterInputs=document.getElementById('epsQuarterInputs');
+const epsCurrentYear=new Date().getFullYear();
+const epsCurrentQuarter=Math.floor(new Date().getMonth()/3)+1;
+// Current calendar quarter may not have reported yet; label ends at previous quarter.
+const epsEndQuarterIndex=epsCurrentYear*4+epsCurrentQuarter-2;
+for(let i=0;i<12;i++){
+ const n=epsEndQuarterIndex-11+i,y=Math.floor(n/4),q=n%4+1,label=y+' Q'+q;
+ epsQuarterLabels.push(label);
+ const wrap=document.createElement('div'),lab=document.createElement('label'),inp=document.createElement('input');
+ inp.id='epsQ'+i;inp.type='number';inp.step='any';inp.placeholder='미입력';lab.htmlFor=inp.id;lab.textContent=label;
+ wrap.append(lab,inp);epsQuarterInputs.append(wrap);
+}
+let epsQuarterReport='';
+function epsChart(containerId,title,labels,values,unit,allowNegative=false){
+ const root=document.getElementById(containerId);root.replaceChildren();
+ const head=document.createElement('div');head.className='chart-title';head.textContent=title;root.append(head);
+ const valid=values.map((v,i)=>({v,i})).filter(x=>Number.isFinite(x.v));
+ if(!valid.length){const p=document.createElement('p');p.className='muted';p.textContent='표시할 입력 데이터가 없습니다. 실제 수치를 입력해 주세요.';root.append(p);return}
+ const W=760,H=270,left=55,right=18,top=22,bottom=55,iw=W-left-right,ih=H-top-bottom;
+ const low=Math.min(allowNegative?0:0,...valid.map(x=>x.v)),high=Math.max(0,...valid.map(x=>x.v));
+ const padding=Math.max((high-low)*0.12,0.1),min=low-padding,max=high+padding;
+ const x=i=>left+(labels.length===1?iw/2:i*iw/(labels.length-1));
+ const y=v=>top+ih-(v-min)/(max-min)*ih;
+ const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
+ svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.setAttribute('role','img');svg.setAttribute('aria-label',title+'; 사용자 입력 데이터');
+ const add=(tag,attrs,content)=>{const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,String(v)));if(content!==undefined)e.textContent=content;svg.append(e);return e};
+ for(let j=0;j<5;j++){const v=min+(max-min)*j/4,yy=y(v);add('line',{x1:left,y1:yy,x2:W-right,y2:yy,stroke:'#e0e6f0','stroke-width':1});add('text',{x:left-8,y:yy+4,'text-anchor':'end',fill:'#62748b','font-size':12},v.toFixed(1)+(unit==='%'?'%':''))}
+ for(let i=0;i<labels.length;i++){if(labels.length>8&&i%2!==0&&i!==labels.length-1)continue;add('text',{x:x(i),y:H-29,'text-anchor':'middle',fill:'#62748b','font-size':labels.length>8?10:12},labels[i])}
+ // Only connect adjacent known points. Missing values remain visible as gaps.
+ let segment=[];const flush=()=>{if(segment.length>1)add('polyline',{points:segment.map(pt=>pt.join(',')).join(' '),fill:'none',stroke:'#2455a6','stroke-width':3,'stroke-linejoin':'round'});segment=[]};
+ values.forEach((v,i)=>{if(!Number.isFinite(v)){flush();return}segment.push([x(i),y(v)]);add('circle',{cx:x(i),cy:y(v),r:4.5,fill:'#2455a6'});if(labels.length<=6)add('text',{x:x(i),y:y(v)-11,'text-anchor':'middle','font-size':12,fill:'#1d355d'},v.toFixed(2)+(unit==='%'?'%':''))});flush();
+ root.append(svg);const cap=document.createElement('div');cap.className='eps-status';cap.textContent='사용자 입력값 · 누락값은 선으로 연결하지 않음 · 출처 및 회계기준 검증 전';root.append(cap);
+}
+function epsDrawAnnual(){epsChart('epsAnnualChart','연간 희석 EPS · 확정(A)/예상(E) 구분',epsYears.map((yr,i)=>yr+(document.getElementById('epsStatus'+i).value==='estimate'?'E':'A')),epsYears.map((_,i)=>epsNumber('epsY'+i)),'달러',true)}
+function epsDrawConsensus(){const old=epsNumber('epsOld'),now=epsNumber('epsNew'),target=epsNumber('epsTargetYear');epsChart('epsConsensusChart',(Number.isInteger(target)?target+'년':'동일 연도')+' EPS 예상치 수정 · 2시점 비교',['3개월 전','현재'],[old,now],'달러',true)}
+document.getElementById('epsQuarterCalc').onclick=()=>{
+ const vals=epsQuarterLabels.map((_,i)=>epsNumber('epsQ'+i));
+ const growth=vals.map((v,i)=>i>=4&&v!==null&&vals[i-4]!==null&&vals[i-4]>0&&v>0?(v/vals[i-4]-1)*100:null);
+ const rows=['분기 | 희석 EPS | 전년 동기 대비 성장률 | 성장률 변화'];
+ let last=null;
+ for(let i=0;i<vals.length;i++){
+  const g=growth[i],change=g!==null&&last!==null?g-last:null;
+  rows.push(epsQuarterLabels[i]+' | '+(vals[i]===null?'미입력':vals[i].toFixed(3))+' | '+epsFmt(g)+' | '+(change===null?'N/M':(change>=0?'+':'')+change.toFixed(1)+'%p'));
+  last=g;
+ }
+ const latestFour=vals.slice(-4),ttm=latestFour.every(v=>v!==null)?latestFour.reduce((a,b)=>a+b,0):null;
+ rows.push('최근 4개 분기 EPS 합계(TTM): '+(ttm===null?'미확인 · 최근 4분기 모두 필요':ttm.toFixed(3)));
+ rows.push('주의: GAAP/조정 EPS 혼합 금지. EPS가 0 이하인 구간은 성장률 N/M. 분기별 희석 EPS 합계는 가중평균 주식 수 변동으로 공시 연간 희석 EPS와 다를 수 있음.');
+ epsQuarterReport=rows.join('\n');document.getElementById('epsQuarterResult').textContent=epsQuarterReport;
+ epsChart('epsQuarterChart','분기 EPS 성장률 (YoY)',epsQuarterLabels,growth,'%');
+};
+epsDrawAnnual();epsDrawConsensus();epsChart('epsQuarterChart','분기 EPS 성장률 (YoY)',epsQuarterLabels,Array(12).fill(null),'%');
 </script></body></html>
