@@ -11,7 +11,7 @@
 </style>
 <style>.lab-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:20px}.lab-tabs button{background:#e8edf7;color:#263956;padding:12px 6px}.lab-tabs button[aria-selected="true"]{background:#264a9d;color:white}.lab-tab-caption{color:#68758a;margin:10px 0}.lab-panel[hidden]{display:none!important}.eps-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.eps-grid input{box-sizing:border-box;width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}.eps-grid label{margin-top:8px}.eps-table{width:100%;border-collapse:collapse;margin:12px 0}.eps-table td,.eps-table th{border-bottom:1px solid #dce3ee;padding:10px 8px;text-align:right}.eps-table th:first-child,.eps-table td:first-child{text-align:left}@media(max-width:620px){.lab-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.eps-grid{grid-template-columns:1fr}}.eps-chart{margin:16px 0}.eps-chart svg{display:block;width:100%;height:auto;max-height:300px}.eps-chart .chart-title{font-weight:700;margin-bottom:8px}.eps-quarter-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}.eps-quarter-grid input{box-sizing:border-box;width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px}.eps-quarter-grid label{font-size:13px}.eps-status{font-size:12px;color:#63758e}.eps-table-wrap{overflow-x:auto}@media(max-width:650px){.eps-quarter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.eps-quarter-grid > [hidden]{display:none!important}</style></head><body><main><header><div><h1>투자 사고 실험실</h1><div class="muted">Market Pulse · 유동성 × 심리 × 기업이익</div></div><span class="pill">7.2 · 분기 EPS 간편 보기</span></header><nav class="lab-tabs" aria-label="투자 사고 실험실 메뉴"><button type="button" data-lab-tab="market" aria-selected="true">시장 분석</button><button type="button" data-lab-tab="company" aria-selected="false">기업·EPS</button><button type="button" data-lab-tab="committee" aria-selected="false">투자위원회</button><button type="button" data-lab-tab="review" aria-selected="false">투자 복기</button></nav><p class="lab-tab-caption" id="labTabCaption">시장 데이터와 시장 국면을 확인합니다.</p><section class="lab-panel" id="lab-market"><div class="card" id="officialData"><div class="row"><div><h2>실제 금융 데이터 조회</h2><p class="muted">미국 연방준비은행 FRED 공개 시계열을 GitHub에서 자동 수집합니다. 실제 수치와 가상 시뮬레이션은 별개입니다.</p></div><span class="pill">실제 데이터 · 점수화 없음</span></div><div class="buttons"><button id="fetchData" type="button">GitHub 데이터 새로고침</button><button id="csvBtn" type="button" class="secondary">FRED CSV 가져오기</button><input id="csvFile" type="file" accept=".csv,text/csv" multiple hidden></div><p id="dataStatus" class="muted" role="status" aria-live="polite">GitHub에 저장된 금융 데이터를 불러오는 중입니다.</p><div id="dataGrid" class="grid"></div><p class="muted">출처: <a href="https://fred.stlouisfed.org/" target="_blank" rel="noopener noreferrer">FRED (St. Louis Fed)</a>. 변화량은 마지막 관측일로부터 7·30일 이전의 가장 가까운 유효 관측값과 비교합니다. 일부 지표는 발표 주기가 다릅니다.</p></div><div class="card" id="marketAnalysis"><div class="row"><div><h2>실제 데이터 기반 시장 국면 분석</h2><p class="muted">규칙 기반 해석 · 가상 점수와 분리 · 투자 매매 신호 아님</p></div><span class="pill" id="analysisStatus">데이터 대기</span></div><div class="grid" id="analysisGrid"></div><h3>코스톨라니 관점: 돈 × 심리</h3><div class="note" id="kostolany">데이터가 로드되면 신호의 일치·충돌 여부를 표시합니다.</div><h3>강세·기준·약세 시나리오</h3><div class="grid" id="scenarioGrid"></div><h3>판단의 근거와 한계</h3><div id="analysisEvidence" class="note">지표별 판단 근거를 준비 중입니다.</div><p class="muted">분석 기준: VIX·하이일드 스프레드는 30일 변화, 국채·실질금리는 30일 변화, M2는 전월·전년, 연준 총자산은 4주 변화를 우선합니다. 지표가 부족하면 결론을 보류합니다. 기준값은 교육용 휴리스틱으로 예측력 검증 전입니다.</p></div>
 </section><section class="lab-panel" id="lab-company" hidden><div class="card" id="epsAnalysis"><div class="row"><div><h2>7.2 · 연간·분기 EPS 성장 추적</h2><p class="muted">실적·예상 EPS를 직접 입력해 성장률, 성장률 변화, 컨센서스 수정을 구분합니다. 기업 데이터 자동 조회는 아직 제공하지 않습니다. 연도는 자동 이동하며 실제·예상 상태는 직접 선택합니다.</p></div><span class="pill">입력값 기반 · 무료</span></div>
-<div class="training-step"><h3>1. EPS 입력</h3><label for="epsCompany">기업명·티커</label><input id="epsCompany" type="text" placeholder="예: 알파벳 GOOGL" maxlength="100"><div class="eps-grid" id="epsInputs"></div><p class="muted">연도와 EPS는 동일 회계 기준·통화·희석 EPS를 사용하세요. 적자 또는 흑자전환 구간의 일반적인 성장률 계산은 의미가 없을 수 있습니다.</p><button id="epsCalc">EPS 성장 흐름 계산</button></div>
+<div class="training-step" id="secImportBox"><h3>0. 미국 SEC 확정 EPS 자동 불러오기 <span style="font-size:12px;color:#64748b">7.3</span></h3><p class="muted">GitHub Actions가 미리 수집한 SEC 회사 공시를 읽습니다. GAAP 희석 EPS만 입력하며, 미공시·검증 불가 분기는 비워둡니다. 컨센서스는 포함되지 않습니다.</p><div class="buttons"><label for="secTicker" style="margin:0;align-self:center">미국 종목 티커</label><input id="secTicker" type="text" value="GOOGL" placeholder="예: GOOGL" style="max-width:160px"><button id="secLoad" type="button">SEC 확정 EPS 불러오기</button></div><p id="secStatus" class="muted" aria-live="polite">지원 종목 목록은 company-eps.json이 배포된 후 표시됩니다.</p><details><summary>데이터 범위와 계산상 주의사항</summary><p>공식 SEC XBRL companyfacts의 us-gaap EarningsPerShareDiluted 태그를 사용합니다. 보고일·회계기간·공시서류(10-K/10-Q)와 단위 USD/shares를 검사합니다. 회계연도가 달력연도와 다르거나 주식분할·재작성·분기 EPS 반올림 등으로 수치가 달라질 수 있습니다. 4분기 단독 희석 EPS를 연간 EPS에서 앞선 3개 분기 EPS를 빼서 산출하지 않습니다. 10-K 연간값과 10-Q 분기값만 수집하므로 4분기는 공란일 수 있습니다.</p></details></div><div class="training-step"><h3>1. EPS 입력</h3><label for="epsCompany">기업명·티커</label><input id="epsCompany" type="text" placeholder="예: 알파벳 GOOGL" maxlength="100"><div class="eps-grid" id="epsInputs"></div><p class="muted">연도와 EPS는 동일 회계 기준·통화·희석 EPS를 사용하세요. 적자 또는 흑자전환 구간의 일반적인 성장률 계산은 의미가 없을 수 있습니다.</p><button id="epsCalc">EPS 성장 흐름 계산</button></div>
 <div class="training-step"><h3>2. 분기별 EPS · 최근 12개 분기</h3><p class="muted">분기 희석 EPS를 오래된 분기부터 입력하세요. 동일한 회계 기준의 실제 EPS만 입력해야 하며, 전년 동기 대비 성장률은 4분기 전과 비교합니다. 미입력 분기는 추정하지 않습니다.</p><div class="buttons" style="margin:10px 0"><button type="button" class="secondary" id="epsQuarterToggle" aria-expanded="false" aria-controls="epsQuarterInputs">과거 4개 분기 펼치기 · 12개 전체 보기</button></div><p class="muted" id="epsQuarterViewNote">최근 8개 분기만 표시합니다. 이전 4개 분기는 보관하며, 초기 4개 분기의 전년 동기 성장률을 계산하려면 이전 분기 자료가 필요합니다.</p><div class="eps-quarter-grid" id="epsQuarterInputs"></div><button id="epsQuarterCalc" type="button">분기 EPS 성장·TTM 계산</button><div id="epsQuarterResult" class="feedback" aria-live="polite">분기 EPS를 입력한 뒤 계산해 주세요.</div><div class="eps-chart" id="epsQuarterChart"></div></div>
 <div class="training-step"><h3>3. EPS 컨센서스 수정 확인</h3><p class="muted">같은 회계연도 EPS 전망을 서로 다른 시점에서 비교합니다. 실제 컨센서스는 입력자가 출처를 확인해야 합니다.</p><div class="eps-grid"><div><label for="epsOld">3개월 전 예상 EPS</label><input id="epsOld" type="number" step="any" placeholder="예: 10.5"></div><div><label for="epsNew">현재 예상 EPS</label><input id="epsNew" type="number" step="any" placeholder="예: 10.0"></div><div><label for="epsTargetYear">예상 대상 회계연도</label><input id="epsTargetYear" type="number" step="1" placeholder="예: 2027"></div><div><label for="epsSource">자료 출처·확인일</label><input id="epsSource" type="text" placeholder="예: 증권사 집계, 2026-11-05"></div></div><button id="epsRevision">추정치 변화 계산</button></div>
 <div class="training-step"><h3>4. 결과 및 투자위원회 연계</h3><div id="epsResult" class="feedback" aria-live="polite">EPS를 입력하고 계산을 눌러주세요.</div><div class="eps-chart" id="epsAnnualChart"></div><div class="eps-chart" id="epsConsensusChart"></div><div class="buttons"><button class="secondary" id="epsToCommittee">분석 내용을 투자위원회 의제로 보내기</button><button class="secondary" id="epsExport">EPS 분석 JSON 백업</button></div><p class="muted">전망 EPS의 성장률 둔화와 컨센서스 하향은 서로 다릅니다. 둘 중 하나만으로 매수·매도를 결정하지 않습니다.</p></div></div></section><section class="lab-panel" id="lab-committee" hidden><div class="card" id="investmentCommittee">
@@ -326,7 +326,7 @@ committeeHistory();
 
 // 7.0: lightweight tab navigation and manually supplied EPS analysis.
 const labTabs=['market','company','committee','review'];
-function showLabTab(tab){if(!labTabs.includes(tab))return;labTabs.forEach(t=>{const el=document.getElementById('lab-'+t),btn=document.querySelector('[data-lab-tab="'+t+'"]');el.hidden=t!==tab;btn.setAttribute('aria-selected',String(t===tab))});const captions={market:'공식 시장 지표와 규칙 기반 시장 국면 분석',company:'EPS 성장률·성장 둔화·컨센서스 수정 (직접 입력)',committee:'4인 무료 규칙 기반 투자위원회',review:'판단 훈련·손익비 비교·복기 및 가상 시장 실험'};document.getElementById('labTabCaption').textContent=captions[tab];try{history.replaceState(null,'','#'+tab)}catch(e){}}
+function showLabTab(tab){if(!labTabs.includes(tab))return;labTabs.forEach(t=>{const el=document.getElementById('lab-'+t),btn=document.querySelector('[data-lab-tab="'+t+'"]');el.hidden=t!==tab;btn.setAttribute('aria-selected',String(t===tab))});const captions={market:'공식 시장 지표와 규칙 기반 시장 국면 분석',company:'SEC 확정 EPS 자동 조회 · 성장률·컨센서스 수정 (일부 직접 입력)',committee:'4인 무료 규칙 기반 투자위원회',review:'판단 훈련·손익비 비교·복기 및 가상 시장 실험'};document.getElementById('labTabCaption').textContent=captions[tab];try{history.replaceState(null,'','#'+tab)}catch(e){}}
 document.querySelectorAll('[data-lab-tab]').forEach(btn=>btn.addEventListener('click',()=>showLabTab(btn.dataset.labTab)));
 showLabTab(labTabs.includes(location.hash.slice(1))?location.hash.slice(1):'market');
 const epsYearNow=new Date().getFullYear();
@@ -430,4 +430,53 @@ document.getElementById('epsQuarterCalc').onclick=()=>{
  epsChart('epsQuarterChart','분기 EPS 성장률 (YoY)',epsQuarterExpanded?epsQuarterLabels:epsQuarterLabels.slice(-8),epsQuarterExpanded?growth:growth.slice(-8),'%');
 };
 epsDrawAnnual();epsDrawConsensus();epsChart('epsQuarterChart','분기 EPS 성장률 (YoY)',epsQuarterLabels.slice(-8),Array(8).fill(null),'%');
+
+// 7.3: SEC preprocessed JSON loader; no live SEC browser requests.
+const secTickerInput=document.getElementById('secTicker');
+const secStatus=document.getElementById('secStatus');
+let secCatalog=null;
+async function secGetCatalog(){
+ const r=await fetch('./company-eps.json?v='+Date.now(),{cache:'no-store'});
+ if(!r.ok)throw Error('company-eps.json 없음 (HTTP '+r.status+'). GitHub Actions의 Update Company EPS 실행 여부 확인');
+ const data=await r.json();
+ if(!data||data.schema_version!==1||!data.companies||typeof data.companies!=='object')throw Error('EPS 데이터 형식 오류');
+ return data;
+}
+async function secImport(){
+ const ticker=secTickerInput.value.trim().toUpperCase();
+ if(!/^[A-Z][A-Z0-9.-]{0,9}$/.test(ticker)){secStatus.textContent='티커 형식을 확인하세요.';return}
+ secStatus.textContent='SEC 공시 저장 데이터 확인 중…';
+ try{
+  secCatalog=await secGetCatalog();
+  const item=secCatalog.companies[ticker];
+  if(!item){secStatus.textContent='현재 지원 목록에 없는 티커입니다: '+ticker+' · 지원: '+Object.keys(secCatalog.companies).join(', ');return}
+  if(item.error){secStatus.textContent=ticker+' 수집 실패: '+item.error;return}
+  if(!Array.isArray(item.annual)||!Array.isArray(item.quarterly))throw Error('기업 EPS 자료 구조 오류');
+  const current=document.getElementById('epsCompany').value.trim();
+  if((current||epsYears.some((_,i)=>document.getElementById('epsY'+i).value.trim())||epsQuarterLabels.some((_,i)=>document.getElementById('epsQ'+i).value.trim()))&&!confirm('현재 EPS 입력값을 SEC 확정 실적으로 교체할까요? 예상 EPS와 컨센서스 입력은 유지됩니다.'))return;
+  // Preserve forecast entries; clear only the fields marked actual.
+  for(let i=0;i<epsYears.length;i++){
+   const status=document.getElementById('epsStatus'+i),field=document.getElementById('epsY'+i);
+   const row=item.annual.find(x=>x.year===epsYears[i]);
+   if(row){field.value=String(row.eps);status.value='actual'}
+   else if(status.value==='actual')field.value='';
+  }
+  epsQuarterLabels.forEach((label,i)=>{
+   const match=/^(\d{4}) Q([1-4])$/.exec(label);const row=match&&item.quarterly.find(x=>x.year===Number(match[1])&&x.quarter===Number(match[2]));
+   document.getElementById('epsQ'+i).value=row?String(row.eps):'';
+  });
+  document.getElementById('epsCompany').value=item.name+' ('+ticker+')';
+  document.getElementById('epsCalc').click();document.getElementById('epsQuarterCalc').click();
+  const last=item.latest_filed||'미확인';
+  secStatus.textContent='SEC 공시 반영: '+item.name+' ('+ticker+') · 마지막 공시일 '+last+' · 데이터 생성 '+(secCatalog.updated_at||'미확인')+' · 연간 '+item.annual.length+'건, 분기 '+item.quarterly.length+'건. 4분기 공란은 정상일 수 있습니다. 회계연도는 SEC FY 기준이며 달력연도와 다를 수 있습니다.';
+ }catch(e){secStatus.textContent='자동 조회 실패: '+e.message}
+}
+document.getElementById('secLoad').addEventListener('click',secImport);
+// Do not request the file until the company tab is opened or user clicks load.
+let secHintLoaded=false;
+document.querySelector('[data-lab-tab="company"]').addEventListener('click',async()=>{
+ if(secHintLoaded)return;secHintLoaded=true;
+ try{secCatalog=await secGetCatalog();secStatus.textContent='자동 수집 지원 종목: '+Object.keys(secCatalog.companies).join(', ')+' · 수집 시각 '+(secCatalog.updated_at||'미확인')}
+ catch(e){secStatus.textContent='아직 SEC 데이터가 배포되지 않았습니다. GitHub Actions를 설정한 뒤 수동 실행해 주세요.'}
+});
 </script></body></html>
